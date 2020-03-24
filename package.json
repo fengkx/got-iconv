@@ -1,0 +1,51 @@
+{
+  "name": "got-iconv",
+  "version": "0.1.0",
+  "description": "A got wrapper with automaticlly encoding conversion using iconv-lite",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx nyc ava -v"
+  },
+  "files": [
+    "index.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fengkx/got-iconv.git"
+  },
+  "keywords": [
+    "got",
+    "iconv-lite",
+    "encoding",
+    "http",
+    "request",
+    "whatwg"
+  ],
+  "author": "fengkx",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fengkx/got-iconv/issues"
+  },
+  "homepage": "https://github.com/fengkx/got-iconv#readme",
+  "devDependencies": {
+    "@sindresorhus/is": "^2.1.0",
+    "ava": "^3.5.1",
+    "get-stream": "^5.1.0",
+    "nyc": "^15.0.0",
+    "test-listen": "^1.1.0",
+    "xo": "^0.28.0"
+  },
+  "dependencies": {
+    "got": "^10.6.0",
+    "html-encoding-sniffer": "^2.0.1",
+    "iconv-lite": "^0.5.1",
+    "whatwg-encoding-mapper": "^1.0.0",
+    "whatwg-mimetype": "^2.3.0"
+  },
+  "ava": {
+    "files": [
+      "test/**/*",
+      "!test/helper"
+    ]
+  }
+}
