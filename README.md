@@ -5,6 +5,11 @@
 [![Build Status](https://travis-ci.org/fengkx/got-iconv.svg?branch=master)](https://travis-ci.org/fengkx/got-iconv)
 [![Coverage Status](https://coveralls.io/repos/github/fengkx/got-iconv/badge.svg?branch=master)](https://coveralls.io/github/fengkx/got-iconv?branch=master)
 
+[![NPM](https://nodei.co/npm/got-iconv.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/got-iconv/)
+
+```$xslt
+npm i got-iconv
+```
 
 Build on top of [iconv-lite](https://www.npmjs.com/package/iconv-lite) and some awesome `WHATWG` packages maked by the jsdom team.
 
