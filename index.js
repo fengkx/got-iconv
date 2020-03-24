@@ -112,7 +112,7 @@ function iconvConvert(options, next) {
 		const resp = await next(options);
 		const buffer = resp.body;
 		const mime = resp.headers['content-type'] && new MIMEType(resp.headers['content-type']);
-		const charset = mime.parameters.get('charset');
+		const charset = mime && mime.parameters.get('charset');
 		let encodingDetected;
 		if (charset === undefined && mime.isHTML()) {
 			encodingDetected = htmlEncodingSniffer(buffer);
