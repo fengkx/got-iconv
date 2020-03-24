@@ -19,9 +19,7 @@ test('content with charset in header', async t => {
 	t.is(await getStream(s), text);
 });
 
-
-
-test('content without charset in header', async (t) => {
+test('content without charset in header', async t => {
 	const html = '<meta charset="gbk"><title>你好world</title>';
 	const url = await createTestServer('text/html', iconv.encode(html, 'gbk'));
 	const resp = await got(url);

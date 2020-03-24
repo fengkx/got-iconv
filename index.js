@@ -25,8 +25,9 @@ function convertStream(options, next) {
 
 			if (!encodingDetected && options._throwEncodingNotDetected === true) {
 				const err = new EncodingNotDetectedError('can not detecte any of encoding');
-				this.destroy(err)
+				this.destroy(err);
 			}
+
 			encoding = encodingDetected || 'utf8';
 			if (iconv.encodingExists(encodingDetected)) {
 				this.emit('encoding', encoding);
@@ -103,10 +104,11 @@ function iconvConvert(options, next) {
 	}
 
 	return (async () => {
-		if(options.resolveBodyOnly) {
+		if (options.resolveBodyOnly) {
 			options._resolveBodyOnly = true;
 			options.resolveBodyOnly = false;
 		}
+
 		const resp = await next(options);
 		const buffer = resp.body;
 		const mime = resp.headers['content-type'] && new MIMEType(resp.headers['content-type']);
@@ -121,6 +123,7 @@ function iconvConvert(options, next) {
 		if (!encodingDetected && options._throwEncodingNotDetected) {
 			return Promise.reject(new EncodingNotDetectedError('can not detecte any of encoding'));
 		}
+
 		const encoding = encodingDetected || 'utf8';
 		// Console.log(encodingDetected + ' ' + encoding)
 		if (options._responseType === 'text' || options._responseType === 'json') {
@@ -128,17 +131,19 @@ function iconvConvert(options, next) {
 				resp.body = iconv.decode(resp.body, encoding);
 			} else {
 				if (options._throwEncodingNotSupported) {
-					 return Promise.reject(new EncodingNotSupportError(`${encoding} not supported by iconv-lite`));
+					return Promise.reject(new EncodingNotSupportError(`${encoding} not supported by iconv-lite`));
 				}
+
 				resp.body = iconv.decode(resp.body, 'utf8');
 			}
 
 			if (options._responseType === 'json') {
 				try {
 					resp.body = JSON.parse(resp.body);
-					if(options._resolveBodyOnly) {
-						return resp.body
+					if (options._resolveBodyOnly) {
+						return resp.body;
 					}
+
 					return resp;
 				} catch (error) {
 					return Promise.reject(new got.ParseError(error, resp, options));
@@ -153,4 +158,4 @@ function iconvConvert(options, next) {
 module.exports = gotIconv;
 module.exports.default = gotIconv;
 module.exports.EncodingNotDetectedError = EncodingNotDetectedError;
-module.exports.EncodingNotSupportError  = EncodingNotSupportError;
+module.exports.EncodingNotSupportError = EncodingNotSupportError;
