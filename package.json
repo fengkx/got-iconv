@@ -30,6 +30,7 @@
   "devDependencies": {
     "@sindresorhus/is": "^2.1.0",
     "ava": "^3.5.1",
+    "coveralls": "^3.0.11",
     "get-stream": "^5.1.0",
     "nyc": "^15.0.0",
     "test-listen": "^1.1.0",
