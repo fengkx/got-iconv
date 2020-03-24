@@ -7,7 +7,7 @@
     "test": "npx nyc ava -v",
     "lint": "xo",
     "test-cov": "nyc npm test",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls --verbose"
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "files": [
     "index.js"
