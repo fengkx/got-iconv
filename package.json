@@ -4,7 +4,10 @@
   "description": "A got wrapper with automaticlly encoding conversion using iconv-lite",
   "main": "index.js",
   "scripts": {
-    "test": "npx nyc ava -v"
+    "test": "npx nyc ava -v",
+    "lint": "xo",
+    "test-cov": "nyc npm test",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls --verbose"
   },
   "files": [
     "index.js"
