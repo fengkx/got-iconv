@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx nyc ava -v",
-    "lint": "xo",
-    "test-cov": "nyc npm test",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "lint": "xo"
   },
   "files": [
     "index.js"

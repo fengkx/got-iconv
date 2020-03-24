@@ -2,6 +2,10 @@
 
 > A [got](https://github.com/sindresorhus/got) wrapper with automaticlly encoding conversion using iconv-lite.
 
+[![Build Status](https://travis-ci.org/fengkx/got-iconv.svg?branch=master)](https://travis-ci.org/fengkx/got-iconv)
+[![Coverage Status](https://coveralls.io/repos/github/fengkx/got-iconv/badge.svg?branch=master)](https://coveralls.io/github/fengkx/got-iconv?branch=master)
+
+
 Build on top of [iconv-lite](https://www.npmjs.com/package/iconv-lite) and some awesome `WHATWG` packages maked by the jsdom team.
 
 - [whatwg-encoding](https://www.npmjs.com/package/whatwg-encoding)
