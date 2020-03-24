@@ -114,7 +114,7 @@ function iconvConvert(options, next) {
 		const mime = resp.headers['content-type'] && new MIMEType(resp.headers['content-type']);
 		const charset = mime && mime.parameters.get('charset');
 		let encodingDetected;
-		if (charset === undefined && mime.isHTML()) {
+		if (charset === undefined && mime && mime.isHTML()) {
 			encodingDetected = htmlEncodingSniffer(buffer);
 		} else if (charset) {
 			encodingDetected = encodeMapper.labelToName(charset);
