@@ -132,7 +132,6 @@ function iconvConvert(options, next) {
 		}
 
 		const encoding = encodingDetected || 'utf8';
-		// Console.log(encodingDetected + ' ' + encoding)
 		if (options._responseType === 'text' || options._responseType === 'json') {
 			if (iconv.encodingExists(encoding)) {
 				resp.body = iconv.decode(resp.body, encoding);
