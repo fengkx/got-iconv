@@ -97,8 +97,18 @@ class BufferKbStream extends Transform {
 	}
 }
 
-class EncodingNotSupportError extends Error {}
-class EncodingNotDetectedError extends Error {}
+class EncodingNotSupportError extends Error {
+	constructor(message) {
+		super(message);
+		this.name = 'EncodingNotSupportError';
+	}
+}
+class EncodingNotDetectedError extends Error {
+	constructor(message) {
+		super(message);
+		this.name = 'EncodingNotDetectedError';
+	}
+}
 function iconvConvert(options, next) {
 	if (options.responseType === 'buffer') {
 		return next(options);
