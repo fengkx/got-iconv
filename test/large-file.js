@@ -5,7 +5,7 @@ const MIMEType = require('whatwg-mimetype');
 const getStream = require('get-stream');
 
 test('large file in utf8', async t => {
-	const text = '大'.repeat(4096);
+	const text = '大'.repeat(409600);
 	const url = await createTestServer('text/plain', text);
 	const resp = await got(url);
 	const mime = new MIMEType(resp.headers['content-type']);
