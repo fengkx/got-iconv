@@ -70,22 +70,29 @@ class BufferKbStream extends Transform {
 	constructor() {
 		super();
 		this._data = [];
-		this._kbCount = 0;
+		this._len = 0;
+		this._kbFlag = false;
 	}
 
 	_transform(chunk, encoding, callback) {
-		this._data.push(chunk);
-		this._kbCount += chunk.byteLength;
-		if (this._kbCount >= 1024) {
+		this._len += chunk.byteLength;
+		if (!this._kbFlag) {
+			this._data.push(chunk);
+		}
+
+		if (this._len >= 1024) {
 			this.emit('kb', Buffer.concat(this._data));
-			this._kbCount = 0;
+			this._kbFlag = true;
 		}
 
 		callback(null, chunk);
 	}
 
 	_final(callback) {
-		this.emit('kb', Buffer.concat(this._data));
+		if (!this._kbFlag) {
+			this.emit('kb', Buffer.concat(this._data));
+		}
+
 		callback();
 	}
 }
