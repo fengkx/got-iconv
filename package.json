@@ -7,6 +7,9 @@
     "test": "npx nyc ava -v",
     "lint": "xo"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "files": [
     "index.js"
   ],
@@ -34,6 +37,7 @@
     "coveralls": "^3.0.11",
     "get-stream": "^5.1.0",
     "nyc": "^15.0.0",
+    "pre-commit": "^1.2.2",
     "test-listen": "^1.1.0",
     "xo": "^0.28.0"
   },
