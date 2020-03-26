@@ -3,7 +3,7 @@ const got = require('got');
 const iconv = require('iconv-lite');
 const MIMEType = require('whatwg-mimetype');
 const encodeMapper = require('whatwg-encoding-mapper');
-const htmlEncodingSniffer = require('html-encoding-sniffer');
+const htmlEncodingSniffer = require('html-encoding-sniffer-xs');
 
 const gotIconv = got.extend({
 	handlers: [

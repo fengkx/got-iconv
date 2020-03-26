@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "got": "^10.6.0",
-    "html-encoding-sniffer": "^2.0.1",
+    "html-encoding-sniffer-xs": "^1.0.0",
     "iconv-lite": "^0.5.1",
     "whatwg-encoding-mapper": "^1.0.0",
     "whatwg-mimetype": "^2.3.0"
