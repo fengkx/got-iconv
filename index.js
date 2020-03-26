@@ -4,6 +4,7 @@ const iconv = require('iconv-lite');
 const MIMEType = require('whatwg-mimetype');
 const encodeMapper = require('whatwg-encoding-mapper');
 const htmlEncodingSniffer = require('html-encoding-sniffer-xs');
+const xmlEncodingSniffer = require('./xml-encoding-sniff');
 
 const gotIconv = got.extend({
 	handlers: [
@@ -19,8 +20,12 @@ function convertStream(options, next) {
 	const kbStream = new BufferKbStream();
 	kbStream
 		.once('kb', function (data) {
-			if (!encodingDetected && mime && mime.isHTML()) {
-				encodingDetected = htmlEncodingSniffer(data);
+			if (!encodingDetected && mime) {
+				if (mime.isHTML()) {
+					encodingDetected = htmlEncodingSniffer(data);
+				} else if (mime.isXML()) {
+					encodingDetected = xmlEncodingSniffer(data);
+				}
 			}
 
 			if (!encodingDetected && options._throwEncodingNotDetected === true) {
@@ -131,8 +136,12 @@ function iconvConvert(options, next) {
 		const mime = resp.headers['content-type'] && new MIMEType(resp.headers['content-type']);
 		const charset = mime && mime.parameters.get('charset');
 		let encodingDetected;
-		if (charset === undefined && mime && mime.isHTML()) {
-			encodingDetected = htmlEncodingSniffer(buffer);
+		if (charset === undefined && mime) {
+			if (mime.isHTML()) {
+				encodingDetected = htmlEncodingSniffer(buffer);
+			} else if (mime.isXML()) {
+				encodingDetected = xmlEncodingSniffer(buffer);
+			}
 		} else if (charset) {
 			encodingDetected = encodeMapper.labelToName(charset);
 		}
