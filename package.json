@@ -1,6 +1,6 @@
 {
   "name": "got-iconv",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A got wrapper with automaticlly encoding conversion using iconv-lite",
   "main": "index.js",
   "scripts": {
