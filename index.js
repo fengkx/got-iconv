@@ -12,22 +12,32 @@ const gotIconv = got.extend({
 	]
 });
 
-function convertStream(options, next) {
-	let mime;
+function detecteFromBuffer(mime, buffer) {
 	let encodingDetected;
+	const charset = mime && mime.parameters.get('charset');
+	if (mime) {
+		if (mime.isHTML()) {
+			encodingDetected = htmlEncodingSniffer(buffer, {transportLayerEncodingLabel: charset});
+		} else if (mime.isXML()) {
+			encodingDetected = xmlEncodingSniffer(buffer);
+		}
+	}
+
+	if (!encodingDetected && charset) {
+		encodingDetected = encodeMapper.labelToName(charset);
+	}
+
+	return encodingDetected;
+}
+
+function convertStream(options, next) {
 	let encoding;
+	let mime;
 
 	const kbStream = new BufferKbStream();
 	kbStream
-		.once('kb', function (data) {
-			if (!encodingDetected && mime) {
-				if (mime.isHTML()) {
-					encodingDetected = htmlEncodingSniffer(data);
-				} else if (mime.isXML()) {
-					encodingDetected = xmlEncodingSniffer(data);
-				}
-			}
-
+		.once('kb', function (buffer) {
+			const encodingDetected = detecteFromBuffer(mime, buffer);
 			if (!encodingDetected && options._throwEncodingNotDetected === true) {
 				const err = new EncodingNotDetectedError('can not detecte any of encoding');
 				this.destroy(err);
@@ -50,8 +60,6 @@ function convertStream(options, next) {
 	source
 		.on('response', response => {
 			mime = response.headers['content-type'] && new MIMEType(response.headers['content-type']);
-			const charset = mime && mime.parameters.get('charset');
-			encodingDetected = charset && encodeMapper.labelToName(charset);
 		});
 
 	const r = new PassThrough();
@@ -134,17 +142,7 @@ function iconvConvert(options, next) {
 		const resp = await next(options);
 		const buffer = resp.body;
 		const mime = resp.headers['content-type'] && new MIMEType(resp.headers['content-type']);
-		const charset = mime && mime.parameters.get('charset');
-		let encodingDetected;
-		if (charset === undefined && mime) {
-			if (mime.isHTML()) {
-				encodingDetected = htmlEncodingSniffer(buffer);
-			} else if (mime.isXML()) {
-				encodingDetected = xmlEncodingSniffer(buffer);
-			}
-		} else if (charset) {
-			encodingDetected = encodeMapper.labelToName(charset);
-		}
+		const encodingDetected = detecteFromBuffer(mime, buffer);
 
 		if (!encodingDetected && options._throwEncodingNotDetected) {
 			return Promise.reject(new EncodingNotDetectedError('can not detecte any of encoding'));
