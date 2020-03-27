@@ -1,3 +1,10 @@
+const {labelToName} = require('whatwg-encoding-mapper');
+/**
+ * Get encoding from a buffer of a xml file
+ * @param {Buffer} buffer buffer of xml
+ * @param {string} [fallbackEncoding] encoding to fallback
+ * @return {string|null} encoding mapper to whatwg-encoding or fallback or null if no fallback and no encoidng deceted
+ */
 const xmlEncodingSniff = (buffer, fallbackEncoding) => {
 	// https://www.w3.org/TR/xml/#sec-TextDecl
 	/**
@@ -30,11 +37,10 @@ const xmlEncodingSniff = (buffer, fallbackEncoding) => {
 	const matched = textDecl.match(/encoding=['"]([A-Za-z]([-.\w])*)['"]/);
 	if (matched && matched.length >= 1) {
 		encoding = matched[1];
-	} else {
-		encoding = fallbackEncoding;
+		return labelToName(encoding);
 	}
 
-	return encoding || null;
+	return fallbackEncoding || null;
 };
 
 module.exports = xmlEncodingSniff;
