@@ -149,28 +149,26 @@ function iconvConvert(options, next) {
 		}
 
 		const encoding = encodingDetected || 'utf8';
-		if (options._responseType === 'text' || options._responseType === 'json') {
-			if (iconv.encodingExists(encoding)) {
-				resp.body = iconv.decode(resp.body, encoding);
-			} else {
-				if (options._throwEncodingNotSupported) {
-					return Promise.reject(new EncodingNotSupportError(`${encoding} not supported by iconv-lite`));
-				}
-
-				resp.body = iconv.decode(resp.body, 'utf8');
+		if (iconv.encodingExists(encoding)) {
+			resp.body = iconv.decode(resp.body, encoding);
+		} else {
+			if (options._throwEncodingNotSupported) {
+				return Promise.reject(new EncodingNotSupportError(`${encoding} not supported by iconv-lite`));
 			}
 
-			if (options._responseType === 'json') {
-				try {
-					resp.body = JSON.parse(resp.body);
-					if (options._resolveBodyOnly) {
-						return resp.body;
-					}
+			resp.body = iconv.decode(resp.body, 'utf8');
+		}
 
-					return resp;
-				} catch (error) {
-					return Promise.reject(new got.ParseError(error, resp, options));
+		if (options._responseType === 'json') {
+			try {
+				resp.body = JSON.parse(resp.body);
+				if (options._resolveBodyOnly) {
+					return resp.body;
 				}
+
+				return resp;
+			} catch (error) {
+				return Promise.reject(new got.ParseError(error, resp, options));
 			}
 		}
 
