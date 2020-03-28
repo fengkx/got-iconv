@@ -4,6 +4,8 @@
 
 [![Build Status](https://travis-ci.org/fengkx/got-iconv.svg?branch=master)](https://travis-ci.org/fengkx/got-iconv)
 [![Coverage Status](https://coveralls.io/repos/github/fengkx/got-iconv/badge.svg?branch=master)](https://coveralls.io/github/fengkx/got-iconv?branch=master)
+[![Install Size](https://badgen.net/packagephobia/install/got-iconv)](https://bundlephobia.com/result?p=got-iconv)
+[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 
 [![NPM](https://nodei.co/npm/got-iconv.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/got-iconv/)
 

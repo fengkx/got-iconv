@@ -25,7 +25,8 @@
     "encoding",
     "http",
     "request",
-    "whatwg"
+    "whatwg",
+    "charset"
   ],
   "author": "fengkx",
   "license": "MIT",
