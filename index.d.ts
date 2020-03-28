@@ -1,4 +1,4 @@
-import {Options} from 'got';
+import got, {Options} from 'got';
 export * from 'got';
 
 export declare class EncodingNotDetectedError {
@@ -15,3 +15,5 @@ export declare interface GotIConvOption extends Options {
 	_throwEncodingNotDetected?: boolean;
 	_throwEncodingNotSupported?: boolean;
 }
+
+export default got;
