@@ -31,9 +31,7 @@ function detecteFromBuffer(mime, buffer) {
 }
 
 function convertStream(options, next) {
-	let encoding;
 	let mime;
-
 	const kbStream = new BufferKbStream();
 	kbStream
 		.once('kb', function (buffer) {
@@ -43,7 +41,7 @@ function convertStream(options, next) {
 				this.destroy(err);
 			}
 
-			encoding = encodingDetected || 'utf8';
+			const encoding = encodingDetected || 'utf8';
 			if (iconv.encodingExists(encodingDetected)) {
 				this.emit('encoding', encoding);
 			} else {
