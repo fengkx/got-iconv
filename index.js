@@ -125,8 +125,6 @@ function iconvConvert(options, next) {
 		return next(options);
 	}
 
-	options._responseType = options.responseType;
-	options.responseType = 'buffer';
 	if (options.isStream) {
 		return convertStream(options, next);
 	}
@@ -137,8 +135,13 @@ function iconvConvert(options, next) {
 			options.resolveBodyOnly = false;
 		}
 
+		if (options.responseType === 'json') {
+			options._jsonResponse = true;
+			options.responseType = 'buffer';
+		}
+
 		const resp = await next(options);
-		const buffer = resp.body;
+		const buffer = resp.rawBody;
 		const mime = resp.headers['content-type'] && new MIMEType(resp.headers['content-type']);
 		const encodingDetected = detecteFromBuffer(mime, buffer);
 
@@ -148,16 +151,18 @@ function iconvConvert(options, next) {
 
 		const encoding = encodingDetected || 'utf8';
 		if (iconv.encodingExists(encoding)) {
-			resp.body = iconv.decode(resp.body, encoding);
+			resp.body = iconv.decode(buffer, encoding);
 		} else {
 			if (options._throwEncodingNotSupported) {
 				return Promise.reject(new EncodingNotSupportError(`${encoding} not supported by iconv-lite`));
 			}
 
-			resp.body = iconv.decode(resp.body, 'utf8');
+			resp.body = iconv.decode(buffer, 'utf8');
 		}
 
-		if (options._responseType === 'json') {
+		if (options._jsonResponse) {
+			options.responseType = 'json';
+			delete options._jsonResponse;
 			try {
 				resp.body = JSON.parse(resp.body);
 				if (options._resolveBodyOnly) {

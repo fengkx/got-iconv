@@ -35,17 +35,17 @@
   },
   "homepage": "https://github.com/fengkx/got-iconv#readme",
   "devDependencies": {
-    "@sindresorhus/is": "^2.1.0",
-    "ava": "^3.5.1",
+    "@sindresorhus/is": "^2.1.1",
+    "ava": "^3.7.1",
     "coveralls": "^3.0.11",
     "get-stream": "^5.1.0",
-    "nyc": "^15.0.0",
+    "nyc": "^15.0.1",
     "pre-commit": "^1.2.2",
     "test-listen": "^1.1.0",
-    "xo": "^0.28.0"
+    "xo": "^0.28.3"
   },
   "dependencies": {
-    "got": "^10.6.0",
+    "got": "^11.0.0",
     "html-encoding-sniffer-xs": "^1.0.0",
     "iconv-lite": "^0.5.1",
     "whatwg-encoding-mapper": "^1.0.0",
