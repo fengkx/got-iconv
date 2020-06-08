@@ -47,7 +47,7 @@
   "dependencies": {
     "got": "^11.0.0",
     "html-encoding-sniffer-xs": "^1.0.0",
-    "iconv-lite": "^0.5.1",
+    "iconv-lite": "^0.6.0",
     "whatwg-encoding-mapper": "^1.0.0",
     "whatwg-mimetype": "^2.3.0"
   },
