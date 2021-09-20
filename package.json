@@ -49,7 +49,7 @@
     "html-encoding-sniffer-xs": "^1.0.0",
     "iconv-lite": "^0.6.0",
     "whatwg-encoding-mapper": "^1.0.0",
-    "whatwg-mimetype": "^2.3.0"
+    "whatwg-mimetype": "^3.0.0"
   },
   "ava": {
     "files": [
