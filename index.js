@@ -37,8 +37,8 @@ function convertStream(options, next) {
 		.once('kb', function (buffer) {
 			const encodingDetected = detecteFromBuffer(mime, buffer);
 			if (!encodingDetected && options._throwEncodingNotDetected === true) {
-				const err = new EncodingNotDetectedError('can not detecte any of encoding');
-				this.destroy(err);
+				const error = new EncodingNotDetectedError('can not detecte any of encoding');
+				this.destroy(error);
 			}
 
 			const encoding = encodingDetected || 'utf8';
@@ -46,8 +46,8 @@ function convertStream(options, next) {
 				this.emit('encoding', encoding);
 			} else {
 				if (options._throwEncodingNotSupported) {
-					const err = new EncodingNotSupportError(`${encoding} not supported by iconv-lite`);
-					this.destroy(err);
+					const error = new EncodingNotSupportError(`${encoding} not supported by iconv-lite`);
+					this.destroy(error);
 				}
 
 				this.emit('encoding', encoding);
@@ -61,15 +61,15 @@ function convertStream(options, next) {
 		});
 
 	const r = new PassThrough();
-	const p1 = pipeline(source, kbStream, err => {
-		if (err) {
-			r.emit('error', err);
+	const p1 = pipeline(source, kbStream, error => {
+		if (error) {
+			r.emit('error', error);
 		}
 	});
 	kbStream.once('encoding', enc => {
-		pipeline(p1, iconv.decodeStream(enc), r, err => {
-			if (err) {
-				r.emit('error', err);
+		pipeline(p1, iconv.decodeStream(enc), r, error => {
+			if (error) {
+				r.emit('error', error);
 			}
 		});
 	});

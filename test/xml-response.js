@@ -1,9 +1,9 @@
 const test = require('ava');
 const iconv = require('iconv-lite');
-const got = require('..');
-const createTestServer = require('./helper/create-test-server');
 const MIMEType = require('whatwg-mimetype');
 const getStream = require('get-stream');
+const got = require('..');
+const createTestServer = require('./helper/create-test-server');
 
 test('xml content without charset in header', async t => {
 	const xml = '<?xml version="1.0" encoding="gbk"?><rss  xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">你好';

@@ -57,5 +57,11 @@
       "test/**/*",
       "!test/helper"
     ]
+  },
+  "xo": {
+    "rules": {
+      "unicorn/prefer-module": "off",
+      "import/extensions": "off"
+    }
   }
 }

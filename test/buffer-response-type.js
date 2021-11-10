@@ -1,8 +1,8 @@
 const test = require('ava');
-const got = require('..');
-const createTestServer = require('./helper/create-test-server');
 const MIMEType = require('whatwg-mimetype');
 const is = require('@sindresorhus/is');
+const got = require('..');
+const createTestServer = require('./helper/create-test-server');
 
 test('buffer responseType', async t => {
 	const text = 'ABCDEFG';

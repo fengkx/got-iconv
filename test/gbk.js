@@ -1,9 +1,9 @@
 const test = require('ava');
 const iconv = require('iconv-lite');
-const got = require('..');
-const createTestServer = require('./helper/create-test-server');
 const MIMEType = require('whatwg-mimetype');
 const getStream = require('get-stream');
+const got = require('..');
+const createTestServer = require('./helper/create-test-server');
 
 test('content with charset in header', async t => {
 	const text = '你好world';

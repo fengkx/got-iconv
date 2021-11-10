@@ -1,8 +1,8 @@
 const test = require('ava');
-const got = require('..');
 const {ParseError} = require('got');
-const createTestServer = require('./helper/create-test-server');
 const MIMEType = require('whatwg-mimetype');
+const got = require('..');
+const createTestServer = require('./helper/create-test-server');
 
 test('json responseType', async t => {
 	const jsonData = {

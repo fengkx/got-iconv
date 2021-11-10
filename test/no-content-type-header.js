@@ -1,7 +1,7 @@
 const test = require('ava');
+const getStream = require('get-stream');
 const got = require('..');
 const createTestServer = require('./helper/create-test-server');
-const getStream = require('get-stream');
 
 test('when there is no content type header', async t => {
 	const data = 'Hello 你好';
@@ -13,8 +13,8 @@ test('when there is no content type header', async t => {
 	const s = got.stream(url);
 	t.is(await getStream(s), data);
 
-	const err = await t.throwsAsync(got(url, {_throwEncodingNotDetected: true}), {instanceOf: got.EncodingNotDetectedError});
-	t.is(err.message, 'can not detecte any of encoding');
+	const error = await t.throwsAsync(got(url, {_throwEncodingNotDetected: true}), {instanceOf: got.EncodingNotDetectedError});
+	t.is(error.message, 'can not detecte any of encoding');
 
 	const streamFail = await got.stream(url, {
 		_throwEncodingNotDetected: true

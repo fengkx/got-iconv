@@ -35,7 +35,7 @@ const xmlEncodingSniff = (buffer, fallbackEncoding) => {
 
 	const textDecl = Buffer.from(o).toString();
 	const matched = textDecl.match(/encoding=['"]([A-Za-z]([-.\w])*)['"]/);
-	if (matched && matched.length >= 1) {
+	if (matched && matched.length > 0) {
 		encoding = matched[1];
 		return labelToName(encoding);
 	}
