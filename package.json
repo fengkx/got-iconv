@@ -45,7 +45,7 @@
     "xo": "^0.40.0"
   },
   "dependencies": {
-    "got": "^11.0.0",
+    "got": "^12.0.4",
     "got-cjs": "^12.0.0-beta.4",
     "html-encoding-sniffer-xs": "^1.0.0",
     "iconv-lite": "^0.6.0",
